@@ -43,7 +43,7 @@ export const AuthenticationStoreModel = types
           localStorage.setItem("username", username);
           store.setProp("isAuthenticated", false);
           store.setStatus("done");
-          window.navigate("/auth/verify-otp");
+          PATHS.Auth.verifyOTP;
           return response;
         }
 
@@ -52,7 +52,7 @@ export const AuthenticationStoreModel = types
         store.setProp("accessToken", response.token);
         store.setProp("isAuthenticated", true);
         store.setStatus("done");
-        window.navigate("/");
+        PATHS.Overview.root;
         return response;
       } catch (error) {
         console.log("error", error);
