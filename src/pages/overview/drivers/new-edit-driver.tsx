@@ -1,0 +1,164 @@
+import { LayoutDashboard, User2Icon } from "lucide-react";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Breadcrumb, FormWrapper } from "@/components/widgets";
+import { PATHS } from "@/routers/paths";
+import { Button } from "@/components/ui/button";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Form } from "@/components/ui/form";
+import { useStores } from "@/models/helpers";
+import toast from "react-hot-toast";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
+import { observer } from "mobx-react-lite";
+import { get } from "lodash";
+import { z } from "zod";
+
+const driverSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  mobile_number: z.string().min(1, "Mobile number is required"),
+  current_location: z.string().optional(),
+  father_name: z.string().optional(),
+  mother_name: z.string().optional(),
+});
+
+type ZodDriver = z.infer<typeof driverSchema>;
+
+export const NewEditDriver = observer(function NewEditDriver() {
+  const {
+    driversStore: { createDriver, status, drivers, updateDriver, getDrivers },
+  } = useStores();
+
+  const location = useLocation();
+  const isEdit = location.pathname.includes("edit");
+  const params = useParams();
+  const navigate = useNavigate();
+  const id = get(params, "id", "");
+
+  const currentDriver = drivers.data?.find((driver) => driver.id == Number(id));
+
+  const form = useForm<ZodDriver>({
+    resolver: zodResolver(driverSchema),
+    defaultValues: {
+      name: currentDriver?.name || "",
+      mobile_number: currentDriver?.mobile_number || "",
+      current_location: currentDriver?.current_location || "",
+      father_name: currentDriver?.father_name || "",
+      mother_name: currentDriver?.mother_name || "",
+    },
+  });
+
+  const handleSubmit = async (values: ZodDriver) => {
+    try {
+      if (isEdit) {
+        await updateDriver(Number(id), {
+          name: values.name,
+          mobile_number: values.mobile_number,
+          current_location: values.current_location,
+          father_name: values.father_name,
+          mother_name: values.mother_name,
+        });
+        toast.success("Driver updated successfully");
+        navigate(PATHS.Overview.drivers.root);
+        return;
+      }
+
+      await createDriver({
+        name: values.name,
+        mobile_number: values.mobile_number,
+        current_location: values.current_location,
+        father_name: values.father_name,
+        mother_name: values.mother_name,
+      });
+      await getDrivers({ page: 1, limit: 10 });
+      toast.success("Driver created successfully");
+      navigate(PATHS.Overview.drivers.root);
+    } catch (error) {
+      console.error("Error:", error);
+      toast.error("Failed to save driver");
+    }
+  };
+
+  return (
+    <>
+      <Breadcrumb
+        links={[
+          {
+            label: "Dashboard",
+            href: PATHS.Overview.app,
+            icon: <LayoutDashboard className="h-4 w-4" />,
+          },
+          {
+            label: "Drivers",
+            href: PATHS.Overview.drivers.root,
+            icon: <User2Icon className="h-4 w-4" />,
+          },
+          {
+            label: isEdit ? "Edit Driver" : "New Driver",
+            disabled: true,
+            icon: <User2Icon className="h-4 w-4" />,
+          },
+        ]}
+      />
+
+      <div className="my-8">
+        <Card>
+          <Form {...form}>
+            <form onSubmit={form.handleSubmit(handleSubmit)}>
+              <CardHeader>
+                <CardTitle className="text-xl font-semibold">
+                  {isEdit ? "Edit Driver" : "New Driver"}
+                </CardTitle>
+                <CardDescription className="text-sm">
+                  {isEdit
+                    ? "Edit driver details below."
+                    : "Add a new driver by filling in the details below."}
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <FormWrapper form={form} name={"name"} label="Name" />
+                  <FormWrapper
+                    form={form}
+                    name={"mobile_number"}
+                    label="Mobile Number"
+                  />
+                  <FormWrapper
+                    form={form}
+                    name={"current_location"}
+                    label="Current Location"
+                  />
+                  <FormWrapper
+                    form={form}
+                    name={"father_name"}
+                    label="Father Name"
+                  />
+                  <FormWrapper
+                    form={form}
+                    name={"mother_name"}
+                    label="Mother Name"
+                  />
+                </div>
+              </CardContent>
+              <CardFooter className="flex justify-end">
+                <Button
+                  loading={status === "pending"}
+                  type="submit"
+                  className="flex items-center space-x-2"
+                >
+                  <span>{isEdit ? "Update Driver" : "Save Driver"}</span>
+                </Button>
+              </CardFooter>
+            </form>
+          </Form>
+        </Card>
+      </div>
+    </>
+  );
+});
