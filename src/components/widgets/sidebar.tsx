@@ -13,6 +13,9 @@ import {
   MenuIcon,
   Shield,
   MapIcon,
+  Bike,
+  UserCheck,
+  CreditCard,
 } from "lucide-react";
 import { PATHS } from "@/routers/paths";
 import { Button } from "@/components/ui/button";
@@ -36,17 +39,19 @@ import { useTheme } from "next-themes";
 const mapIcons = (icon: string) => {
   switch (icon) {
     case "dashboard":
-      return <LayoutDashboardIcon className="mr-2 h-4 w-4" />;
+      return <LayoutDashboardIcon className="mr-3 h-5 w-5" />;
     case "users":
-      return <Users2 className="mr-2 h-4 w-4" />;
+      return <Users2 className="mr-3 h-5 w-5" />;
     case "shield":
-      return <Shield className="mr-2 h-4 w-4" />;
+      return <CreditCard className="mr-3 h-5 w-5" />;
     case "countries":
-      return <MapIcon className="mr-2 h-4 w-4" />;
+      return <MapIcon className="mr-3 h-5 w-5" />;
     case "settings":
-      return <Settings className="mr-2 h-4 w-4" />;
+      return <Bike className="mr-3 h-5 w-5" />;
+    case "drivers":
+      return <UserCheck className="mr-3 h-5 w-5" />;
     default:
-      return <LayoutDashboardIcon className="mr-2 h-4 w-4" />;
+      return <LayoutDashboardIcon className="mr-3 h-5 w-5" />;
   }
 };
 
@@ -73,7 +78,7 @@ export const Sidebar = observer(function Sidebar() {
     { path: PATHS.Overview.app, icon: "dashboard", subject: "Dashboard" },
     { path: PATHS.Overview.users.root, icon: "users", subject: "Users" },
     { path: PATHS.Overview.owners.root, icon: "users", subject: "Owners" },
-    { path: PATHS.Overview.drivers.root, icon: "users", subject: "Drivers" },
+    { path: PATHS.Overview.drivers.root, icon: "drivers", subject: "Drivers" },
     {
       path: PATHS.Overview.motorcycles.root,
       icon: "settings",
@@ -81,60 +86,81 @@ export const Sidebar = observer(function Sidebar() {
     },
   ];
 
-  const isDark = useTheme().theme === "dark";
-
   return (
     <main className="flex h-screen bg-background">
       <aside
         className={cn(
-          "fixed inset-y-0 border-r border-gray-100 dark:border-gray-800 bg-gray-950 dark:bg-gray-950 left-0 z-50 w-64  p-6 transition-transform duration-300 ease-in-out md:relative md:translate-x-0",
+          "fixed inset-y-0 border-r left-0 z-50 w-72 transition-transform duration-300 ease-in-out md:relative md:translate-x-0 shadow-xl flex flex-col",
+          "border-gray-200 bg-gradient-to-b from-white to-gray-50 dark:border-gray-700 dark:bg-gradient-to-b dark:from-gray-900 dark:to-gray-800",
           sidebarOpen ? "translate-x-0" : "-translate-x-full"
         )}
       >
-        <div className="flex items-center  justify-between mb-6">
-          <img
-            src={Assets.logo}
-            alt="logo"
-            className="w-16 h-16 rounded-full"
-          />
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden"
-            onClick={toggleSidebar}
-          >
-            <XIcon className="h-6 w-6" />
-          </Button>
-        </div>
-        <nav className="space-y-2">
-          {menuItems.map((menu) => (
-            <Link
-              key={menu.path}
-              to={menu.path}
-              onClick={() => {
-                setSidebarOpen(false);
-              }}
+        <div className="p-8">
+          <div className="flex items-center justify-between mb-10">
+            <div className="flex items-center space-x-3">
+              <img
+                src={Assets.logo}
+                alt="logo"
+                className="w-12 h-12 rounded-xl shadow-md"
+              />
+              <div>
+                <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">
+                  Motorcycle
+                </h2>
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                  Management System
+                </p>
+              </div>
+            </div>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="md:hidden hover:bg-gray-100 dark:hover:bg-gray-700"
+              onClick={toggleSidebar}
             >
-              <Button
-                variant={
-                  getActive(menu.path)
-                    ? "secondary"
-                    : isDark
-                    ? "ghost"
-                    : "default"
-                }
-                className="w-full justify-start capitalize mt-2"
+              <XIcon className="h-5 w-5" />
+            </Button>
+          </div>
+          <nav className="space-y-3">
+            {menuItems.map((menu) => (
+              <Link
+                key={menu.path}
+                to={menu.path}
+                onClick={() => {
+                  setSidebarOpen(false);
+                }}
               >
-                {mapIcons(menu.icon)}
-                {menu.subject}
-              </Button>
-            </Link>
-          ))}
-        </nav>
+                <Button
+                  variant={getActive(menu.path) ? "default" : "ghost"}
+                  className={cn(
+                    "w-full justify-start capitalize h-12 text-left font-medium transition-all duration-200 hover:bg-gray-50 hover:shadow-sm dark:hover:bg-gray-700 dark:hover:shadow-sm",
+                    getActive(menu.path)
+                      ? "bg-blue-50 text-blue-700 border border-blue-200 shadow-sm dark:bg-blue-900/20 dark:text-blue-300 dark:border-blue-700"
+                      : "text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100"
+                  )}
+                >
+                  {mapIcons(menu.icon)}
+                  {menu.subject}
+                </Button>
+              </Link>
+            ))}
+          </nav>
+        </div>
+
+        <div className="mt-auto p-8 border-t border-gray-200 dark:border-gray-700">
+          <div className="text-center">
+            <p className="text-xs text-gray-500 dark:text-gray-400">
+              Motorcycle v1.0.0
+            </p>
+            <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
+              © 2024 All rights reserved
+            </p>
+          </div>
+        </div>
       </aside>
 
       <div className="flex-1 overflow-auto">
-        <header className="sticky top-0 z-40 border-b border-gray-100 dark:border-gray-800 bg-white dark:bg-gray-950 flex items-center justify-between p-4">
+        <header className="sticky top-0 z-40 border-b border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-900 flex items-center justify-between p-6 shadow-sm">
           <div className="flex items-center">
             <Button
               variant="ghost"
