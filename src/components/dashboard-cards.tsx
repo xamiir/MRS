@@ -4,49 +4,66 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import {
   Users,
-  Database,
-  Activity,
-  TrendingUp,
+  UserCheck,
+  Bike,
+  User,
   ArrowUpRight,
   ArrowDownRight,
 } from "lucide-react";
+import { useStores } from "@/models/helpers";
+import { observer } from "mobx-react-lite";
+import { useEffect } from "react";
 
-const stats = [
-  {
-    title: "Total Users",
-    value: "12,543",
-    change: "+12.5%",
-    trend: "up",
-    icon: Users,
-    description: "Active users this month",
-  },
-  {
-    title: "Database Queries",
-    value: "1.2M",
-    change: "+8.2%",
-    trend: "up",
-    icon: Database,
-    description: "Queries executed today",
-  },
-  {
-    title: "API Requests",
-    value: "847K",
-    change: "-2.1%",
-    trend: "down",
-    icon: Activity,
-    description: "Requests in last 24h",
-  },
-  {
-    title: "Revenue",
-    value: "$24,567",
-    change: "+15.3%",
-    trend: "up",
-    icon: TrendingUp,
-    description: "Monthly recurring revenue",
-  },
-];
+export const DashboardCards = observer(function DashboardCards() {
+  const {
+    usersStore: { getUsers, users },
+    driversStore: { getDrivers, drivers },
+    motorcyclesStore: { getMotorcycles, motorcycles },
+    ownersStore: { getOwners, owners },
+  } = useStores();
 
-export function DashboardCards() {
+  useEffect(() => {
+    getUsers({ page: 1, limit: 1000 });
+    getDrivers({ page: 1, limit: 1000 });
+    getMotorcycles({ page: 1, limit: 1000 });
+    getOwners({ page: 1, limit: 1000 });
+  }, []);
+
+  const stats = [
+    {
+      title: "Total Users",
+      value: users.data?.length || 0,
+      change: "+12.5%",
+      trend: "up",
+      icon: Users,
+      description: "Registered users",
+    },
+    {
+      title: "Total Drivers",
+      value: drivers.data?.length || 0,
+      change: "+8.2%",
+      trend: "up",
+      icon: UserCheck,
+      description: "Active drivers",
+    },
+    {
+      title: "Total Motorcycles",
+      value: motorcycles.data?.length || 0,
+      change: "+15.3%",
+      trend: "up",
+      icon: Bike,
+      description: "Registered motorcycles",
+    },
+    {
+      title: "Total Owners",
+      value: owners.data?.length || 0,
+      change: "+5.1%",
+      trend: "up",
+      icon: User,
+      description: "Vehicle owners",
+    },
+  ];
+
   return (
     <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
       {stats.map((stat) => (
@@ -58,14 +75,16 @@ export function DashboardCards() {
             <stat.icon className="h-4 w-4 text-muted-foreground" />
           </CardHeader>
           <CardContent>
-            <div className="text-2xl font-bold">{stat.value}</div>
+            <div className="text-2xl font-bold">
+              {stat.value.toLocaleString()}
+            </div>
             <div className="flex items-center gap-2 mt-2">
               <Badge
                 variant={stat.trend === "up" ? "default" : "destructive"}
                 className={`text-xs ${
                   stat.trend === "up"
-                    ? "bg-success/10 text-success border-success/20"
-                    : "bg-destructive/10 text-destructive border-destructive/20"
+                    ? "bg-green-500/10 text-green-500 border-green-500/20"
+                    : "bg-red-500/10 text-red-500 border-red-500/20"
                 }`}
               >
                 {stat.trend === "up" ? (
@@ -84,4 +103,4 @@ export function DashboardCards() {
       ))}
     </div>
   );
-}
+});
