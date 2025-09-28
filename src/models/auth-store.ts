@@ -30,12 +30,12 @@ export const AuthenticationStoreModel = types
     },
 
     login: async (username: string, password: string) => {
-      const data = { email: username, password };
+      const data = { username, password };
       try {
         store.setStatus("pending");
         const response = await api.post<GenericResponse<IUser>>(
           "",
-          "/users/login",
+          "/user/login",
           data
         );
 
