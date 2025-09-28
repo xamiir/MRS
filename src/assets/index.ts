@@ -1,5 +1,5 @@
 const assets = {
-  logo: "/logo.png",
+  logo: "/logo.jpg",
 };
 
 type IAssets = typeof assets;
