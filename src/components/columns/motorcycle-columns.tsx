@@ -46,6 +46,31 @@ export const motorcycleColumns: ColumnDef<IMotorcycle>[] = [
     cell: ({ row }) => row.getValue("chassis_number"),
   },
   {
+    accessorKey: "motorcycle_image_url",
+    header: "Image",
+    cell: ({ row }) => {
+      const url = row.getValue("motorcycle_image_url") as string;
+      return url ? (
+        <img src={url} alt="Motorcycle" className="w-16 h-16 object-cover" />
+      ) : (
+        "N/A"
+      );
+    },
+  },
+  {
+    accessorKey: "motorcycle_category",
+    header: "Category",
+    cell: ({ row }) => row.getValue("motorcycle_category") || "N/A",
+  },
+  {
+    accessorKey: "registration_date",
+    header: "Registration Date",
+    cell: ({ row }) => {
+      const date = row.getValue("registration_date") as string;
+      return date ? new Date(date).toLocaleDateString() : "N/A";
+    },
+  },
+  {
     accessorKey: "owner_id",
     header: "Owner ID",
     cell: ({ row }) => row.getValue("owner_id") || "N/A",
