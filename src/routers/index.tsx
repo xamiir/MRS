@@ -37,7 +37,7 @@ const routesConfig: RouteType[] = [
   {
     path: PATHS.Overview.users.new,
     element: lazy(() =>
-      import("../pages/overview/users").then((module) => ({
+      import("../pages/overview/users/new-edit-user").then((module) => ({
         default: module.NewEditUser,
       }))
     ),
@@ -89,8 +89,8 @@ const routesConfig: RouteType[] = [
   {
     path: PATHS.Overview.drivers.new,
     element: lazy(() =>
-      import("../pages/overview/owners/new-edit-owner").then((module) => ({
-        default: module.NewEditOwner,
+      import("../pages/overview/drivers/new-edit-driver").then((module) => ({
+        default: module.NewEditDriver,
       }))
     ),
   },
