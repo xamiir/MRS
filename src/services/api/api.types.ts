@@ -20,6 +20,7 @@ export interface GenericResponse<T> {
   status: boolean;
   total_pages: number;
   current_page: number;
+  next?: string;
 }
 
 export interface GeneralResponse<T> {
