@@ -44,6 +44,16 @@ export const driverColumns: ColumnDef<IDriver>[] = [
     cell: ({ row }) => row.getValue("mobile_number"),
   },
   {
+    accessorKey: "father_name",
+    header: "Father Name",
+    cell: ({ row }) => row.getValue("father_name") || "N/A",
+  },
+  {
+    accessorKey: "mother_name",
+    header: "Mother Name",
+    cell: ({ row }) => row.getValue("mother_name") || "N/A",
+  },
+  {
     accessorKey: "current_location",
     header: "Current Location",
     cell: ({ row }) => row.getValue("current_location") || "N/A",
