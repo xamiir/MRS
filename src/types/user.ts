@@ -9,21 +9,20 @@ export interface VerifyOTPPayload {
 }
 
 export interface IUser {
-  id: string;
-  username: string;
+  id: number;
+  name: string;
+  phone: string;
   email: string;
-  countryId: string;
-  password: string;
-  isActive: boolean;
-  is2faEnabled: boolean;
-  isVerified: boolean;
+  status: string;
+  is_2fa_enabled: boolean;
+  is_email_verified: boolean;
   created_at: string;
   updated_at: string;
 }
 
 export interface IUserDTO {
-  username: string;
+  name: string;
+  phone: string;
   email: string;
-  password?: string;
-  countryId: number;
+  status?: string;
 }

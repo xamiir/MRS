@@ -1,11 +1,10 @@
 import * as z from "zod";
 
 export const userSchema = z.object({
-  username: z.string(),
+  name: z.string(),
+  phone: z.string(),
   email: z.string().email("Invalid email address"),
-  roles: z.array(z.string()),
-  password: z.string().optional(),
-  countryId: z.string(),
+  status: z.string().optional(),
 });
 
 export const providerSchema = z.object({

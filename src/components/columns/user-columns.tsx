@@ -35,11 +35,14 @@ export const userColumns: ColumnDef<IUser>[] = [
     cell: ({ row }) => <div className="capitalize">{row.getValue("id")}</div>,
   },
   {
-    accessorKey: "username",
-    header: "Username",
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("username")}</div>
-    ),
+    accessorKey: "name",
+    header: "Name",
+    cell: ({ row }) => <div className="capitalize">{row.getValue("name")}</div>,
+  },
+  {
+    accessorKey: "phone",
+    header: "Phone",
+    cell: ({ row }) => row.getValue("phone"),
   },
   {
     accessorKey: "email",
@@ -47,12 +50,22 @@ export const userColumns: ColumnDef<IUser>[] = [
     cell: ({ row }) => row.getValue("email"),
   },
   {
-    accessorKey: "isActive",
+    accessorKey: "status",
     header: "Status",
     cell: ({ row }) => {
-      const isActive = row.getValue("isActive");
+      const status = row.getValue("status") as string;
+      return <Badge className="capitalize">{status || "active"}</Badge>;
+    },
+  },
+  {
+    accessorKey: "is_email_verified",
+    header: "Email Verified",
+    cell: ({ row }) => {
+      const isVerified = row.getValue("is_email_verified");
       return (
-        <Badge className="capitalize">{isActive ? "active" : "inactive"}</Badge>
+        <Badge className={isVerified ? "bg-green-500" : "bg-red-500"}>
+          {isVerified ? "Yes" : "No"}
+        </Badge>
       );
     },
   },
@@ -66,7 +79,7 @@ export const userColumns: ColumnDef<IUser>[] = [
         <div className="gap-2 flex items-center">
           <EditButton
             size={"xs"}
-            to={PATHS.Overview.users.edit(user.id)}
+            to={PATHS.Overview.users.edit(user.id.toString())}
             variant={"outline"}
           >
             <EditIcon className="mr-2 h-3 w-3" />
