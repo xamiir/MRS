@@ -4,6 +4,9 @@ export interface IOwner {
   mobile_number: string;
   image_url: string | null;
   motorcycles: IMotorcycle[];
+  documentType: string | null;
+  documentNumber: string | null;
+  documentUpload: string | null;
 }
 
 export interface IOwnerDTO {
@@ -16,6 +19,9 @@ export interface IOwnerDTO {
     registration_date?: string;
     motorcycle_image_url?: string;
   }[];
+  documentType?: string;
+  documentNumber?: string;
+  documentUpload?: string;
 }
 
 export interface IMotorcycle {
