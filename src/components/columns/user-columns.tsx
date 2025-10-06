@@ -79,6 +79,13 @@ export const userColumns: ColumnDef<IUser>[] = [
         <div className="gap-2 flex items-center">
           <EditButton
             size={"xs"}
+            to={PATHS.Overview.users.view(user.id.toString())}
+            variant={"default"}
+          >
+            <span>View</span>
+          </EditButton>
+          <EditButton
+            size={"xs"}
             to={PATHS.Overview.users.edit(user.id.toString())}
             variant={"outline"}
           >
