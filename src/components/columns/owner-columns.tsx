@@ -99,6 +99,13 @@ export const ownerColumns: ColumnDef<IOwner>[] = [
         <div className="gap-2 flex items-center">
           <EditButton
             size={"xs"}
+            to={PATHS.Overview.owners.view(owner.id)}
+            variant={"default"}
+          >
+            <span>View</span>
+          </EditButton>
+          <EditButton
+            size={"xs"}
             to={PATHS.Overview.owners.edit(owner.id)}
             variant={"outline"}
           >
