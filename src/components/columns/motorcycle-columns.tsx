@@ -85,6 +85,13 @@ export const motorcycleColumns: ColumnDef<IMotorcycle>[] = [
         <div className="gap-2 flex items-center">
           <EditButton
             size={"xs"}
+            to={PATHS.Overview.motorcycles.view(motorcycle.id)}
+            variant={"default"}
+          >
+            <span>View</span>
+          </EditButton>
+          <EditButton
+            size={"xs"}
             to={PATHS.Overview.motorcycles.edit(motorcycle.id)}
             variant={"outline"}
           >
