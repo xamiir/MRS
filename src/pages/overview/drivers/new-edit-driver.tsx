@@ -33,6 +33,9 @@ const driverSchema = z.object({
   settling_home_details: z.string().optional(),
   fingerprint_data: z.string().optional(),
   image_url: z.string().optional(),
+  documentType: z.string().optional(),
+  documentNumber: z.string().optional(),
+  documentUpload: z.string().optional(),
 });
 
 type ZodDriver = z.infer<typeof driverSchema>;
@@ -64,6 +67,9 @@ export const NewEditDriver = observer(function NewEditDriver() {
       settling_home_details: currentDriver?.settling_home_details || "",
       fingerprint_data: currentDriver?.fingerprint_data || "",
       image_url: currentDriver?.image_url || "",
+      documentType: currentDriver?.documentType || "",
+      documentNumber: currentDriver?.documentNumber || "",
+      documentUpload: currentDriver?.documentUpload || "",
     },
   });
 
@@ -82,6 +88,9 @@ export const NewEditDriver = observer(function NewEditDriver() {
           settling_home_details: values.settling_home_details,
           fingerprint_data: values.fingerprint_data,
           image_url: values.image_url,
+          documentType: values.documentType,
+          documentNumber: values.documentNumber,
+          documentUpload: values.documentUpload,
         });
         toast.success("Driver updated successfully");
         navigate(PATHS.Overview.drivers.root);
@@ -100,6 +109,9 @@ export const NewEditDriver = observer(function NewEditDriver() {
         settling_home_details: values.settling_home_details,
         fingerprint_data: values.fingerprint_data,
         image_url: values.image_url,
+        documentType: values.documentType,
+        documentNumber: values.documentNumber,
+        documentUpload: values.documentUpload,
       });
       await getDrivers({ page: 1, limit: 10 });
       toast.success("Driver created successfully");
@@ -201,6 +213,36 @@ export const NewEditDriver = observer(function NewEditDriver() {
                     <FileUpload
                       form={form as any}
                       name="image_url"
+                      multiple={false}
+                      maxFiles={1}
+                    />
+                  </div>
+
+                  <FormWrapper
+                    form={form as any}
+                    name={"documentType"}
+                    label="Document Type"
+                    fieldType="select"
+                    data={[
+                      { value: "driver_id", label: "Driver ID" },
+                      { value: "national_id", label: "National ID" },
+                      { value: "passport", label: "Passport" },
+                    ]}
+                  />
+
+                  <FormWrapper
+                    form={form as any}
+                    name={"documentNumber"}
+                    label="Document Number"
+                  />
+
+                  <div className="md:col-span-2">
+                    <label className="text-sm font-medium mb-2 block">
+                      Document Upload
+                    </label>
+                    <FileUpload
+                      form={form as any}
+                      name="documentUpload"
                       multiple={false}
                       maxFiles={1}
                     />
