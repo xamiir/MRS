@@ -51,6 +51,14 @@ const routesConfig: RouteType[] = [
       }))
     ),
   },
+  {
+    path: PATHS.Overview.users.root + "/:id",
+    element: lazy(() =>
+      import("../pages/overview/users/user-view").then((module) => ({
+        default: module.UserView,
+      }))
+    ),
+  },
 
   {
     path: PATHS.Overview.owners.root,
@@ -74,6 +82,14 @@ const routesConfig: RouteType[] = [
     element: lazy(() =>
       import("../pages/overview/owners").then((module) => ({
         default: module.NewEditOwner,
+      }))
+    ),
+  },
+  {
+    path: PATHS.Overview.owners.root + "/:id",
+    element: lazy(() =>
+      import("../pages/overview/owners/owner-view").then((module) => ({
+        default: module.OwnerView,
       }))
     ),
   },
@@ -103,6 +119,14 @@ const routesConfig: RouteType[] = [
       }))
     ),
   },
+  {
+    path: PATHS.Overview.drivers.root + "/:id",
+    element: lazy(() =>
+      import("../pages/overview/drivers/driver-view").then((module) => ({
+        default: module.DriverView,
+      }))
+    ),
+  },
 
   {
     path: PATHS.Overview.motorcycles.root,
@@ -121,6 +145,16 @@ const routesConfig: RouteType[] = [
       import("../pages/overview/motorcycles").then((module) => ({
         default: module.EditMotorcycle,
       }))
+    ),
+  },
+  {
+    path: PATHS.Overview.motorcycles.root + "/:id",
+    element: lazy(() =>
+      import("../pages/overview/motorcycles/motorcycle-view").then(
+        (module) => ({
+          default: module.MotorcycleView,
+        })
+      )
     ),
   },
 ];
