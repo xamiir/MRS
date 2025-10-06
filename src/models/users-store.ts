@@ -21,7 +21,7 @@ export const UsersStoreModel = types
         store.setStatus("pending");
         const response = await api.get<GenericResponse<IUser[]>>(
           "",
-          `/users?page=${page}&limit=${limit}`
+          `/user/?page=${page}&limit=${limit}`
         );
         store.setProp("users", response);
         store.setStatus("done");
@@ -37,7 +37,7 @@ export const UsersStoreModel = types
         store.setStatus("pending");
         const response = await api.post<GenericResponse<IUser>>(
           "",
-          "/user/register",
+          "/user/register/",
           data
         );
         store.setStatus("done");

@@ -30,7 +30,7 @@ export const MotorcyclesStoreModel = types
         const query = next ? `?next=${next}` : `?page=${page}&limit=${limit}`;
         const response = await api.get<GenericResponse<IMotorcycle[]>>(
           "",
-          `/motorcycles${query}`
+          `/motorcycles/${query}`
         );
         store.setProp("motorcycles", response);
         store.setStatus("done");
@@ -65,7 +65,7 @@ export const MotorcyclesStoreModel = types
         store.setStatus("pending");
         const response = await api.post<GenericResponse<any>>(
           "",
-          `/motorcycles/${id}/assign-driver`,
+          `/motorcycles/${id}/assign-driver/`,
           { driver_id: driverId }
         );
         store.setStatus("done");

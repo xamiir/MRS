@@ -30,7 +30,7 @@ export const DriversStoreModel = types
         const query = next ? `?next=${next}` : `?page=${page}&limit=${limit}`;
         const response = await api.get<GenericResponse<IDriver[]>>(
           "",
-          `/drivers${query}`
+          `/drivers/${query}`
         );
         store.setProp("drivers", response);
         store.setStatus("done");
@@ -46,7 +46,7 @@ export const DriversStoreModel = types
         store.setStatus("pending");
         const response = await api.post<GenericResponse<IDriver>>(
           "",
-          "/drivers",
+          "/drivers/",
           data
         );
         store.setStatus("done");

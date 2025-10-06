@@ -5,6 +5,7 @@ import { CountryStoreModel } from "../country-store";
 import { OwnersStoreModel } from "../owners-store";
 import { DriversStoreModel } from "../drivers-store";
 import { MotorcyclesStoreModel } from "../motorcycles-store";
+import { CommonStoreModel } from "../common-store";
 
 /**
  * The root store, any properties defined here will be accessible
@@ -17,6 +18,7 @@ export const RootStoreModel = types.model("Root").props({
   ownersStore: types.optional(OwnersStoreModel, {}),
   driversStore: types.optional(DriversStoreModel, {}),
   motorcyclesStore: types.optional(MotorcyclesStoreModel, {}),
+  commonStore: types.optional(CommonStoreModel, {}),
 });
 
 export type RootStore = Instance<typeof RootStoreModel>;

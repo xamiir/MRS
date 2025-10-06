@@ -17,6 +17,12 @@ export interface IDriverDTO {
   mobile_number: string;
   name: string;
   current_location?: string;
+  origin_location?: string;
   father_name?: string;
+  father_contact?: string;
   mother_name?: string;
+  mother_contact?: string;
+  settling_home_details?: string;
+  fingerprint_data?: string;
+  image_url?: string;
 }

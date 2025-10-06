@@ -30,7 +30,7 @@ export const OwnersStoreModel = types
         const query = next ? `?next=${next}` : `?page=${page}&limit=${limit}`;
         const response = await api.get<GenericResponse<IOwner[]>>(
           "",
-          `/owners${query}`
+          `/owners/${query}`
         );
         store.setProp("owners", response);
         store.setStatus("done");
@@ -46,7 +46,7 @@ export const OwnersStoreModel = types
         store.setStatus("pending");
         const response = await api.post<GenericResponse<IOwner>>(
           "",
-          "/owners",
+          "/owners/",
           data
         );
         store.setStatus("done");

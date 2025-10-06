@@ -19,13 +19,20 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { observer } from "mobx-react-lite";
 import { get } from "lodash";
 import { z } from "zod";
+import FileUpload from "@/components/widgets/file-upload";
 
 const driverSchema = z.object({
   name: z.string().min(1, "Name is required"),
   mobile_number: z.string().min(1, "Mobile number is required"),
   current_location: z.string().optional(),
+  origin_location: z.string().optional(),
   father_name: z.string().optional(),
+  father_contact: z.string().optional(),
   mother_name: z.string().optional(),
+  mother_contact: z.string().optional(),
+  settling_home_details: z.string().optional(),
+  fingerprint_data: z.string().optional(),
+  image_url: z.string().optional(),
 });
 
 type ZodDriver = z.infer<typeof driverSchema>;
@@ -49,8 +56,14 @@ export const NewEditDriver = observer(function NewEditDriver() {
       name: currentDriver?.name || "",
       mobile_number: currentDriver?.mobile_number || "",
       current_location: currentDriver?.current_location || "",
+      origin_location: currentDriver?.origin_location || "",
       father_name: currentDriver?.father_name || "",
+      father_contact: currentDriver?.father_contact || "",
       mother_name: currentDriver?.mother_name || "",
+      mother_contact: currentDriver?.mother_contact || "",
+      settling_home_details: currentDriver?.settling_home_details || "",
+      fingerprint_data: currentDriver?.fingerprint_data || "",
+      image_url: currentDriver?.image_url || "",
     },
   });
 
@@ -61,8 +74,14 @@ export const NewEditDriver = observer(function NewEditDriver() {
           name: values.name,
           mobile_number: values.mobile_number,
           current_location: values.current_location,
+          origin_location: values.origin_location,
           father_name: values.father_name,
+          father_contact: values.father_contact,
           mother_name: values.mother_name,
+          mother_contact: values.mother_contact,
+          settling_home_details: values.settling_home_details,
+          fingerprint_data: values.fingerprint_data,
+          image_url: values.image_url,
         });
         toast.success("Driver updated successfully");
         navigate(PATHS.Overview.drivers.root);
@@ -73,8 +92,14 @@ export const NewEditDriver = observer(function NewEditDriver() {
         name: values.name,
         mobile_number: values.mobile_number,
         current_location: values.current_location,
+        origin_location: values.origin_location,
         father_name: values.father_name,
+        father_contact: values.father_contact,
         mother_name: values.mother_name,
+        mother_contact: values.mother_contact,
+        settling_home_details: values.settling_home_details,
+        fingerprint_data: values.fingerprint_data,
+        image_url: values.image_url,
       });
       await getDrivers({ page: 1, limit: 10 });
       toast.success("Driver created successfully");
@@ -123,27 +148,63 @@ export const NewEditDriver = observer(function NewEditDriver() {
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <FormWrapper form={form} name={"name"} label="Name" />
+                  <FormWrapper form={form as any} name={"name"} label="Name" />
                   <FormWrapper
-                    form={form}
+                    form={form as any}
                     name={"mobile_number"}
                     label="Mobile Number"
                   />
                   <FormWrapper
-                    form={form}
+                    form={form as any}
                     name={"current_location"}
                     label="Current Location"
                   />
                   <FormWrapper
-                    form={form}
+                    form={form as any}
+                    name={"origin_location"}
+                    label="Origin Location"
+                  />
+                  <FormWrapper
+                    form={form as any}
                     name={"father_name"}
                     label="Father Name"
                   />
                   <FormWrapper
-                    form={form}
+                    form={form as any}
+                    name={"father_contact"}
+                    label="Father Contact"
+                  />
+                  <FormWrapper
+                    form={form as any}
                     name={"mother_name"}
                     label="Mother Name"
                   />
+                  <FormWrapper
+                    form={form as any}
+                    name={"mother_contact"}
+                    label="Mother Contact"
+                  />
+                  <FormWrapper
+                    form={form as any}
+                    name={"settling_home_details"}
+                    label="Settling Home Details"
+                  />
+                  <FormWrapper
+                    form={form as any}
+                    name={"fingerprint_data"}
+                    label="Fingerprint Data"
+                  />
+                  <div className="md:col-span-2">
+                    <label className="text-sm font-medium mb-2 block">
+                      Driver Image
+                    </label>
+                    <FileUpload
+                      form={form as any}
+                      name="image_url"
+                      multiple={false}
+                      maxFiles={1}
+                    />
+                  </div>
                 </div>
               </CardContent>
               <CardFooter className="flex justify-end">

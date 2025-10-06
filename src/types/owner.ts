@@ -12,6 +12,9 @@ export interface IOwnerDTO {
   motorcycles?: {
     plate_number: string;
     chassis_number: string;
+    motorcycle_category?: string;
+    registration_date?: string;
+    motorcycle_image_url?: string;
   }[];
 }
 
