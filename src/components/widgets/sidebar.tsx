@@ -16,6 +16,8 @@ import {
   Bike,
   UserCheck,
   CreditCard,
+  ChevronLeft,
+  ChevronRight,
 } from "lucide-react";
 import { PATHS } from "@/routers/paths";
 import { Button } from "@/components/ui/button";
@@ -61,8 +63,10 @@ export const Sidebar = observer(function Sidebar() {
   } = useStores();
 
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   const toggleSidebar = () => setSidebarOpen(!sidebarOpen);
+  const toggleSidebarCollapse = () => setSidebarCollapsed(!sidebarCollapsed);
 
   const navigate = useNavigate();
 
@@ -90,36 +94,58 @@ export const Sidebar = observer(function Sidebar() {
     <main className="flex h-screen bg-background">
       <aside
         className={cn(
-          "fixed inset-y-0 border-r left-0 z-50 w-72 transition-transform duration-300 ease-in-out md:relative md:translate-x-0 shadow-xl flex flex-col",
+          "fixed inset-y-0 border-r left-0 z-50 transition-all duration-300 ease-in-out md:relative shadow-xl flex flex-col",
           "border-gray-200 bg-gradient-to-b from-white to-gray-50 dark:border-gray-700 dark:bg-gradient-to-b dark:from-gray-900 dark:to-gray-800",
-          sidebarOpen ? "translate-x-0" : "-translate-x-full"
+          sidebarCollapsed ? "w-16" : "w-72",
+          sidebarOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
         )}
       >
-        <div className="p-8">
+        <div className="p-4 md:p-8">
           <div className="flex items-center justify-between mb-10">
-            <div className="flex items-center space-x-3">
+            <div
+              className={cn(
+                "flex items-center space-x-3",
+                sidebarCollapsed && "md:justify-center"
+              )}
+            >
               <img
                 src={Assets.logo}
                 alt="logo"
-                className="w-12 h-12 rounded-xl shadow-md"
+                className="w-8 h-8 md:w-12 md:h-12 rounded-xl shadow-md"
               />
-              <div>
-                <h2 className="text-xl font-bold text-gray-900 dark:text-gray-100">
-                  Motorcycle
-                </h2>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                  Management System
-                </p>
-              </div>
+              {!sidebarCollapsed && (
+                <div className="hidden md:block">
+                  <h2 className="text-lg md:text-xl font-bold text-gray-900 dark:text-gray-100">
+                    Motorcycle
+                  </h2>
+                  <p className="text-xs md:text-sm text-gray-500 dark:text-gray-400">
+                    Management System
+                  </p>
+                </div>
+              )}
             </div>
-            <Button
-              variant="ghost"
-              size="icon"
-              className="md:hidden hover:bg-gray-100 dark:hover:bg-gray-700"
-              onClick={toggleSidebar}
-            >
-              <XIcon className="h-5 w-5" />
-            </Button>
+            <div className="flex items-center space-x-2">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="hidden md:flex hover:bg-gray-100 dark:hover:bg-gray-700"
+                onClick={toggleSidebarCollapse}
+              >
+                {sidebarCollapsed ? (
+                  <ChevronRight className="h-5 w-5" />
+                ) : (
+                  <ChevronLeft className="h-5 w-5" />
+                )}
+              </Button>
+              <Button
+                variant="ghost"
+                size="icon"
+                className="md:hidden hover:bg-gray-100 dark:hover:bg-gray-700"
+                onClick={toggleSidebar}
+              >
+                <XIcon className="h-5 w-5" />
+              </Button>
+            </div>
           </div>
           <nav className="space-y-3">
             {menuItems.map((menu) => (
@@ -134,32 +160,50 @@ export const Sidebar = observer(function Sidebar() {
                   variant={getActive(menu.path) ? "default" : "ghost"}
                   className={cn(
                     "w-full justify-start capitalize h-12 text-left font-medium transition-all duration-200 hover:bg-gray-50 hover:shadow-sm dark:hover:bg-gray-700 dark:hover:shadow-sm",
+                    sidebarCollapsed && "md:justify-center md:px-0",
                     getActive(menu.path)
                       ? "bg-blue-50 text-blue-700 border border-blue-200 shadow-sm dark:bg-blue-900/20 dark:text-blue-300 dark:border-blue-700"
                       : "text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-gray-100"
                   )}
                 >
                   {mapIcons(menu.icon)}
-                  {menu.subject}
+                  {!sidebarCollapsed && menu.subject}
                 </Button>
               </Link>
             ))}
           </nav>
         </div>
 
-        <div className="mt-auto p-8 border-t border-gray-200 dark:border-gray-700">
+        <div
+          className={cn(
+            "mt-auto border-t border-gray-200 dark:border-gray-700",
+            sidebarCollapsed ? "p-4" : "p-8"
+          )}
+        >
           <div className="text-center">
-            <p className="text-xs text-gray-500 dark:text-gray-400">
-              Motorcycle v1.0.0
-            </p>
-            <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
-              © 2024 All rights reserved
-            </p>
+            {!sidebarCollapsed && (
+              <>
+                <p className="text-xs text-gray-500 dark:text-gray-400">
+                  Motorcycle v1.0.0
+                </p>
+                <p className="text-xs text-gray-400 dark:text-gray-500 mt-1">
+                  © 2024 All rights reserved
+                </p>
+              </>
+            )}
+            {sidebarCollapsed && (
+              <p className="text-xs text-gray-500 dark:text-gray-400">v1.0.0</p>
+            )}
           </div>
         </div>
       </aside>
 
-      <div className="flex-1 overflow-auto">
+      <div
+        className={cn(
+          "flex-1 overflow-auto transition-all duration-300",
+          sidebarCollapsed ? "md:ml-16" : "md:ml-0"
+        )}
+      >
         <header className="sticky top-0 z-40 border-b border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-900 flex items-center justify-between p-6 shadow-sm">
           <div className="flex items-center">
             <Button
