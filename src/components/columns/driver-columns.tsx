@@ -59,6 +59,43 @@ export const driverColumns: ColumnDef<IDriver>[] = [
     cell: ({ row }) => row.getValue("current_location") || "N/A",
   },
   {
+    accessorKey: "origin_location",
+    header: "Origin Location",
+    cell: ({ row }) => row.getValue("origin_location") || "N/A",
+  },
+  {
+    accessorKey: "father_contact",
+    header: "Father Contact",
+    cell: ({ row }) => row.getValue("father_contact") || "N/A",
+  },
+  {
+    accessorKey: "mother_contact",
+    header: "Mother Contact",
+    cell: ({ row }) => row.getValue("mother_contact") || "N/A",
+  },
+  {
+    accessorKey: "settling_home_details",
+    header: "Home Details",
+    cell: ({ row }) => row.getValue("settling_home_details") || "N/A",
+  },
+  {
+    accessorKey: "fingerprint_data",
+    header: "Fingerprint",
+    cell: ({ row }) => row.getValue("fingerprint_data") || "N/A",
+  },
+  {
+    accessorKey: "image_url",
+    header: "Image",
+    cell: ({ row }) => {
+      const url = row.getValue("image_url") as string;
+      return url ? (
+        <img src={url} alt="Driver" className="w-16 h-16 object-cover" />
+      ) : (
+        "N/A"
+      );
+    },
+  },
+  {
     id: "actions",
     header: "Actions",
     cell: ({ row }) => {
