@@ -20,20 +20,24 @@ export const PATHS = {
       root: path(DASHBOARD_ROOT, "users"),
       new: path(DASHBOARD_ROOT, "users/new"),
       edit: (id: string) => `${DASHBOARD_ROOT}/users/${id}/edit`,
+      view: (id: string) => `${DASHBOARD_ROOT}/users/${id}`,
     },
     owners: {
       root: path(DASHBOARD_ROOT, "owners"),
       new: path(DASHBOARD_ROOT, "owners/new"),
       edit: (id: number) => `${DASHBOARD_ROOT}/owners/${id}/edit`,
+      view: (id: number) => `${DASHBOARD_ROOT}/owners/${id}`,
     },
     drivers: {
       root: path(DASHBOARD_ROOT, "drivers"),
       new: path(DASHBOARD_ROOT, "drivers/new"),
       edit: (id: number) => `${DASHBOARD_ROOT}/drivers/${id}/edit`,
+      view: (id: number) => `${DASHBOARD_ROOT}/drivers/${id}`,
     },
     motorcycles: {
       root: path(DASHBOARD_ROOT, "motorcycles"),
       edit: (id: number) => `${DASHBOARD_ROOT}/motorcycles/${id}/edit`,
+      view: (id: number) => `${DASHBOARD_ROOT}/motorcycles/${id}`,
     },
   },
   Auth: {
