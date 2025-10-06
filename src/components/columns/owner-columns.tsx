@@ -53,6 +53,43 @@ export const ownerColumns: ColumnDef<IOwner>[] = [
     },
   },
   {
+    accessorKey: "documentType",
+    header: "Document Type",
+    cell: ({ row }) => {
+      const type = row.getValue("documentType") as string;
+      const labels = {
+        driver_id: "Driver ID",
+        national_id: "National ID",
+        passport: "Passport",
+      };
+      return type ? labels[type as keyof typeof labels] || type : "N/A";
+    },
+  },
+  {
+    accessorKey: "documentNumber",
+    header: "Document Number",
+    cell: ({ row }) => row.getValue("documentNumber") || "N/A",
+  },
+  {
+    accessorKey: "documentUpload",
+    header: "Document",
+    cell: ({ row }) => {
+      const url = row.getValue("documentUpload") as string;
+      return url ? (
+        <a
+          href={url}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-blue-500 underline"
+        >
+          View
+        </a>
+      ) : (
+        "N/A"
+      );
+    },
+  },
+  {
     id: "actions",
     header: "Actions",
     cell: ({ row }) => {
