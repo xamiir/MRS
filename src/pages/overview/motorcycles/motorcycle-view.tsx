@@ -52,7 +52,7 @@ export const MotorcycleView = observer(function MotorcycleView() {
       </div>
 
       {/* Hero section with motorcycle details */}
-      <div className="mb-8 bg-gradient-to-r from-orange-50 to-red-50 dark:from-orange-950/30 dark:to-red-950/30 rounded-xl p-6 shadow-sm">
+      <div className="mb-8 bg-white dark:bg-gray-900 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700">
         <div className="flex flex-col md:flex-row md:items-center justify-between">
           <div className="flex items-center space-x-4">
             <div className="h-16 w-16 rounded-full bg-orange-100 flex items-center justify-center">
@@ -94,10 +94,10 @@ export const MotorcycleView = observer(function MotorcycleView() {
         <TabsContent value="details" className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Main Info Card */}
-            <Card className="md:col-span-2 overflow-hidden border-0 shadow-md">
-              <CardHeader className="bg-gradient-to-r from-orange-500 to-red-600 text-white">
-                <CardTitle className="flex items-center">
-                  <Bike className="mr-2 h-5 w-5" />
+            <Card className="md:col-span-2 overflow-hidden border-0 shadow-lg bg-white dark:bg-gray-900">
+              <CardHeader className="bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                <CardTitle className="flex items-center text-gray-900 dark:text-gray-100">
+                  <Bike className="mr-2 h-5 w-5 text-gray-600 dark:text-gray-400" />
                   Motorcycle Information
                 </CardTitle>
               </CardHeader>
@@ -148,10 +148,10 @@ export const MotorcycleView = observer(function MotorcycleView() {
             </Card>
 
             {/* Motorcycle Image Card */}
-            <Card className="overflow-hidden border-0 shadow-md">
-              <CardHeader className="bg-gradient-to-r from-orange-500 to-red-600 text-white">
-                <CardTitle className="flex items-center">
-                  <Camera className="mr-2 h-5 w-5" />
+            <Card className="overflow-hidden border-0 shadow-lg bg-white dark:bg-gray-900">
+              <CardHeader className="bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                <CardTitle className="flex items-center text-gray-900 dark:text-gray-100">
+                  <Camera className="mr-2 h-5 w-5 text-gray-600 dark:text-gray-400" />
                   Motorcycle Photo
                 </CardTitle>
               </CardHeader>
@@ -181,10 +181,10 @@ export const MotorcycleView = observer(function MotorcycleView() {
 
         {/* Registration Tab */}
         <TabsContent value="registration">
-          <Card className="border-0 shadow-md overflow-hidden">
-            <CardHeader className="bg-gradient-to-r from-orange-500 to-red-600 text-white">
-              <CardTitle className="flex items-center">
-                <FileCheck className="mr-2 h-5 w-5" />
+          <Card className="border-0 shadow-lg bg-white dark:bg-gray-900 overflow-hidden">
+            <CardHeader className="bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+              <CardTitle className="flex items-center text-gray-900 dark:text-gray-100">
+                <FileCheck className="mr-2 h-5 w-5 text-gray-600 dark:text-gray-400" />
                 Registration Information
               </CardTitle>
             </CardHeader>
@@ -268,10 +268,10 @@ export const MotorcycleView = observer(function MotorcycleView() {
         {/* Images Tab */}
         <TabsContent value="images">
           <div className="grid grid-cols-1 gap-6">
-            <Card className="border-0 shadow-md overflow-hidden">
-              <CardHeader className="bg-gradient-to-r from-orange-500 to-red-600 text-white">
-                <CardTitle className="flex items-center">
-                  <Camera className="mr-2 h-5 w-5" />
+            <Card className="border-0 shadow-lg bg-white dark:bg-gray-900 overflow-hidden">
+              <CardHeader className="bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                <CardTitle className="flex items-center text-gray-900 dark:text-gray-100">
+                  <Camera className="mr-2 h-5 w-5 text-gray-600 dark:text-gray-400" />
                   Motorcycle Images
                 </CardTitle>
               </CardHeader>
