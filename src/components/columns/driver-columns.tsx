@@ -63,75 +63,7 @@ export const driverColumns: ColumnDef<IDriver>[] = [
     header: "Origin Location",
     cell: ({ row }) => row.getValue("origin_location") || "N/A",
   },
-  {
-    accessorKey: "father_contact",
-    header: "Father Contact",
-    cell: ({ row }) => row.getValue("father_contact") || "N/A",
-  },
-  {
-    accessorKey: "mother_contact",
-    header: "Mother Contact",
-    cell: ({ row }) => row.getValue("mother_contact") || "N/A",
-  },
-  {
-    accessorKey: "settling_home_details",
-    header: "Home Details",
-    cell: ({ row }) => row.getValue("settling_home_details") || "N/A",
-  },
-  {
-    accessorKey: "fingerprint_data",
-    header: "Fingerprint",
-    cell: ({ row }) => row.getValue("fingerprint_data") || "N/A",
-  },
-  {
-    accessorKey: "image_url",
-    header: "Image",
-    cell: ({ row }) => {
-      const url = row.getValue("image_url") as string;
-      return url ? (
-        <img src={url} alt="Driver" className="w-16 h-16 object-cover" />
-      ) : (
-        "N/A"
-      );
-    },
-  },
-  {
-    accessorKey: "documentType",
-    header: "Document Type",
-    cell: ({ row }) => {
-      const type = row.getValue("documentType") as string;
-      const labels = {
-        driver_id: "Driver ID",
-        national_id: "National ID",
-        passport: "Passport",
-      };
-      return type ? labels[type as keyof typeof labels] || type : "N/A";
-    },
-  },
-  {
-    accessorKey: "documentNumber",
-    header: "Document Number",
-    cell: ({ row }) => row.getValue("documentNumber") || "N/A",
-  },
-  {
-    accessorKey: "documentUpload",
-    header: "Document",
-    cell: ({ row }) => {
-      const url = row.getValue("documentUpload") as string;
-      return url ? (
-        <a
-          href={url}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-blue-500 underline"
-        >
-          View
-        </a>
-      ) : (
-        "N/A"
-      );
-    },
-  },
+
   {
     id: "actions",
     header: "Actions",
@@ -140,6 +72,13 @@ export const driverColumns: ColumnDef<IDriver>[] = [
 
       return (
         <div className="gap-2 flex items-center">
+          <EditButton
+            size={"xs"}
+            to={PATHS.Overview.drivers.view(driver.id)}
+            variant={"default"}
+          >
+            <span>View</span>
+          </EditButton>
           <EditButton
             size={"xs"}
             to={PATHS.Overview.drivers.edit(driver.id)}
