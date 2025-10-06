@@ -209,6 +209,37 @@ export const NewEditOwner = observer(function NewEditOwner() {
                     label="Mobile Number"
                   />
                 </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <FormWrapper
+                    form={form as any}
+                    name={"documentType"}
+                    label="Document Type"
+                    fieldType="select"
+                    data={[
+                      { value: "driver_id", label: "Driver ID" },
+                      { value: "national_id", label: "National ID" },
+                      { value: "passport", label: "Passport" },
+                    ]}
+                  />
+
+                  <FormWrapper
+                    form={form as any}
+                    name={"documentNumber"}
+                    label="Document Number"
+                  />
+                </div>
+
+                <div className="md:col-span-2">
+                  <label className="text-sm font-medium mb-2 block">
+                    Document Upload
+                  </label>
+                  <FileUpload
+                    form={form as any}
+                    name="documentUpload"
+                    multiple={false}
+                    maxFiles={1}
+                  />
+                </div>
 
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
@@ -333,38 +364,6 @@ export const NewEditOwner = observer(function NewEditOwner() {
                       </div>
                     </div>
                   ))}
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <FormWrapper
-                    form={form as any}
-                    name={"documentType"}
-                    label="Document Type"
-                    fieldType="select"
-                    data={[
-                      { value: "driver_id", label: "Driver ID" },
-                      { value: "national_id", label: "National ID" },
-                      { value: "passport", label: "Passport" },
-                    ]}
-                  />
-
-                  <FormWrapper
-                    form={form as any}
-                    name={"documentNumber"}
-                    label="Document Number"
-                  />
-                </div>
-
-                <div className="md:col-span-2">
-                  <label className="text-sm font-medium mb-2 block">
-                    Document Upload
-                  </label>
-                  <FileUpload
-                    form={form as any}
-                    name="documentUpload"
-                    multiple={false}
-                    maxFiles={1}
-                  />
                 </div>
               </CardContent>
               <CardFooter className="flex justify-end">
