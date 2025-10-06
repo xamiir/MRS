@@ -56,7 +56,7 @@ export const DriverView = observer(function DriverView() {
       </div>
 
       {/* Hero section with driver name and status */}
-      <div className="mb-8 bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 rounded-xl p-6 shadow-sm">
+      <div className="mb-8 bg-white dark:bg-gray-900 rounded-xl p-6 shadow-lg border border-gray-200 dark:border-gray-700">
         <div className="flex flex-col md:flex-row md:items-center justify-between">
           <div className="flex items-center space-x-4">
             <div className="h-16 w-16 rounded-full bg-blue-100 flex items-center justify-center">
@@ -99,10 +99,10 @@ export const DriverView = observer(function DriverView() {
         <TabsContent value="details" className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
             {/* Main Info Card */}
-            <Card className="md:col-span-2 overflow-hidden border-0 shadow-md">
-              <CardHeader className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white">
-                <CardTitle className="flex items-center">
-                  <User className="mr-2 h-5 w-5" />
+            <Card className="md:col-span-2 overflow-hidden border-0 shadow-lg bg-white dark:bg-gray-900">
+              <CardHeader className="bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                <CardTitle className="flex items-center text-gray-900 dark:text-gray-100">
+                  <User className="mr-2 h-5 w-5 text-gray-600 dark:text-gray-400" />
                   Driver Information
                 </CardTitle>
               </CardHeader>
@@ -157,10 +157,10 @@ export const DriverView = observer(function DriverView() {
             </Card>
 
             {/* Driver Image Card */}
-            <Card className="overflow-hidden border-0 shadow-md">
-              <CardHeader className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white">
-                <CardTitle className="flex items-center">
-                  <Camera className="mr-2 h-5 w-5" />
+            <Card className="overflow-hidden border-0 shadow-lg bg-white dark:bg-gray-900">
+              <CardHeader className="bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                <CardTitle className="flex items-center text-gray-900 dark:text-gray-100">
+                  <Camera className="mr-2 h-5 w-5 text-gray-600 dark:text-gray-400" />
                   Driver Photo
                 </CardTitle>
               </CardHeader>
@@ -190,10 +190,10 @@ export const DriverView = observer(function DriverView() {
 
         {/* Family Information Tab */}
         <TabsContent value="family">
-          <Card className="border-0 shadow-md overflow-hidden">
-            <CardHeader className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white">
-              <CardTitle className="flex items-center">
-                <Users className="mr-2 h-5 w-5" />
+          <Card className="border-0 shadow-lg bg-white dark:bg-gray-900 overflow-hidden">
+            <CardHeader className="bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+              <CardTitle className="flex items-center text-gray-900 dark:text-gray-100">
+                <Users className="mr-2 h-5 w-5 text-gray-600 dark:text-gray-400" />
                 Family Information
               </CardTitle>
             </CardHeader>
@@ -275,10 +275,10 @@ export const DriverView = observer(function DriverView() {
         {/* Documents Tab */}
         <TabsContent value="documents">
           <div className="grid grid-cols-1 gap-6">
-            <Card className="border-0 shadow-md overflow-hidden">
-              <CardHeader className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white">
-                <CardTitle className="flex items-center">
-                  <FileText className="mr-2 h-5 w-5" />
+            <Card className="border-0 shadow-lg bg-white dark:bg-gray-900 overflow-hidden">
+              <CardHeader className="bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+                <CardTitle className="flex items-center text-gray-900 dark:text-gray-100">
+                  <FileText className="mr-2 h-5 w-5 text-gray-600 dark:text-gray-400" />
                   Document Information
                 </CardTitle>
               </CardHeader>
@@ -358,10 +358,10 @@ export const DriverView = observer(function DriverView() {
 
         {/* Location & Status Tab */}
         <TabsContent value="location">
-          <Card className="border-0 shadow-md overflow-hidden">
-            <CardHeader className="bg-gradient-to-r from-blue-500 to-indigo-600 text-white">
-              <CardTitle className="flex items-center">
-                <MapPin className="mr-2 h-5 w-5" />
+          <Card className="border-0 shadow-lg bg-white dark:bg-gray-900 overflow-hidden">
+            <CardHeader className="bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700">
+              <CardTitle className="flex items-center text-gray-900 dark:text-gray-100">
+                <MapPin className="mr-2 h-5 w-5 text-gray-600 dark:text-gray-400" />
                 Location & Status Information
               </CardTitle>
             </CardHeader>
