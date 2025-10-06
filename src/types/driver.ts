@@ -11,6 +11,9 @@ export interface IDriver {
   father_contact: string | null;
   settling_home_details: string | null;
   fingerprint_data: string | null;
+  documentType: string | null;
+  documentNumber: string | null;
+  documentUpload: string | null;
 }
 
 export interface IDriverDTO {
@@ -25,4 +28,7 @@ export interface IDriverDTO {
   settling_home_details?: string;
   fingerprint_data?: string;
   image_url?: string;
+  documentType?: string;
+  documentNumber?: string;
+  documentUpload?: string;
 }
