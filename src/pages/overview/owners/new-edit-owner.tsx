@@ -37,6 +37,9 @@ const ownerSchema = z.object({
       })
     )
     .min(1, "At least one motorcycle is required"),
+  documentType: z.string().optional(),
+  documentNumber: z.string().optional(),
+  documentUpload: z.string().optional(),
 });
 
 type ZodOwner = z.infer<typeof ownerSchema>;
@@ -92,6 +95,9 @@ export const NewEditOwner = observer(function NewEditOwner() {
           motorcycle_image_url: "",
         },
       ],
+      documentType: currentOwner?.documentType || "",
+      documentNumber: currentOwner?.documentNumber || "",
+      documentUpload: currentOwner?.documentUpload || "",
     },
   });
 
@@ -132,6 +138,9 @@ export const NewEditOwner = observer(function NewEditOwner() {
           name: values.name,
           mobile_number: values.mobile_number,
           motorcycles: values.motorcycles,
+          documentType: values.documentType,
+          documentNumber: values.documentNumber,
+          documentUpload: values.documentUpload,
         });
         toast.success("Owner updated successfully");
         navigate(PATHS.Overview.owners.root);
@@ -142,6 +151,9 @@ export const NewEditOwner = observer(function NewEditOwner() {
         name: values.name,
         mobile_number: values.mobile_number,
         motorcycles: values.motorcycles,
+        documentType: values.documentType,
+        documentNumber: values.documentNumber,
+        documentUpload: values.documentUpload,
       });
       await getOwners({ page: 1, limit: 10 });
       toast.success("Owner created successfully");
@@ -321,6 +333,38 @@ export const NewEditOwner = observer(function NewEditOwner() {
                       </div>
                     </div>
                   ))}
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <FormWrapper
+                    form={form as any}
+                    name={"documentType"}
+                    label="Document Type"
+                    fieldType="select"
+                    data={[
+                      { value: "driver_id", label: "Driver ID" },
+                      { value: "national_id", label: "National ID" },
+                      { value: "passport", label: "Passport" },
+                    ]}
+                  />
+
+                  <FormWrapper
+                    form={form as any}
+                    name={"documentNumber"}
+                    label="Document Number"
+                  />
+                </div>
+
+                <div className="md:col-span-2">
+                  <label className="text-sm font-medium mb-2 block">
+                    Document Upload
+                  </label>
+                  <FileUpload
+                    form={form as any}
+                    name="documentUpload"
+                    multiple={false}
+                    maxFiles={1}
+                  />
                 </div>
               </CardContent>
               <CardFooter className="flex justify-end">
